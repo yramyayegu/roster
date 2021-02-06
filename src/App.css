@@ -8,16 +8,27 @@
 }
 
 .App-header {
-  background-color: #222;
+  
   height: 150px;
   padding: 20px;
   color: white;
 }
 
+.MuiTypography-body1 {
+  font-size: 1.5rem !important;
+  margin-top: 7px !important;
+}
+.MuiSvgIcon-root {
+
+  height: 1.5em !important;
+}
 .App-title {
   font-size: 1.5em;
 }
-
+.MuiSvgIcon-root {
+  font-size: 2.5rem !important;
+   
+}
 .App-intro {
   font-size: large;
 }
@@ -25,4 +36,8 @@
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+body{
+  color: aliceblue;
+  background-color: rgb(65, 61, 61);
 }
