@@ -1,8 +1,9 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-
-
+import EditIcon from '@material-ui/icons/Edit';
+import Modal from '@material-ui/core/Modal';
+import './App.css'
 //Css
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -13,9 +14,16 @@ const useStyles = makeStyles((theme) => ({
       textAlign: 'center',
       color: theme.palette.text.secondary,
     },
-  }));
-  
+    box:{
+      backgroundColor:'#fff',
+      width: '50%',
+      marginLeft: '25%',
+      marginTop: '15%',
+      
+    }
 
+    
+  }));
 
 function AddItem(props)
 {
@@ -28,10 +36,52 @@ function AddItem(props)
         event.preventDefault();
         return false;
     }
+
+    
+    const [open, setOpen] = React.useState(false);
+    const [title, setTitle] = React.useState('Make Your List');
+
+    const handleOpen = () => {
+      setOpen(true);
+    };
+
+    const handleClose = () => {
+      setOpen(false);
+    };
+    const GetName = (event) =>{
+     
+      setTitle(event.target.value);
+    }
+ 
+    const body = (
+      <div className={classes.paper}>
+        <div className={classes.box}>
+        <input name='todotitle' onChange={GetName.bind()} />
+        <p></p>
+        <p>
+        <button onClick={handleClose} >Submit</button>
+        </p>
+        </div>
+      </div>
+    );
    
 return(
     <div>
-        <Paper className={classes.paper}>Make Your List</Paper>
+        <Paper className={classes.paper}>
+          {title}
+        <EditIcon  onClick={handleOpen}/>
+          
+
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+      >
+        {body}
+      </Modal>
+
+        </Paper>
         <Paper className={classes.paper}>
             <div>
                 <form onSubmit={handleSubmit.bind()}> 

@@ -4,6 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import NewList from './NewList';
 import AddItem from './AddItem';
 import './App.css';
+import {Remove_task} from './utility';
 //CSS
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -37,26 +38,16 @@ const [completed_list,setcompleted_list] = useState([]);
       id:inprogress_list.length,
       value:data
     }])
-    if (id > -1) { 
-      todo_list.splice(id, 1);
-    }
-    
-   
-
-    let i = 0;
-      for (let value of Object.values(todo_list)) {
-        value.id = i++;  
-      }
-   
-console.log(todo_list)
+    Remove_task(id,todo_list)
+  }
 
 
-
-    }
-
-
-  const Add_Complete_list = (data) =>{
-    console.log(data)
+  const Add_Complete_list = (id,data) =>{
+   setcompleted_list([...completed_list,{
+      id:completed_list.length,
+      value:data
+    }])
+    Remove_task(id,inprogress_list)
   }
   const classes = useStyles();
       return (
@@ -66,10 +57,6 @@ console.log(todo_list)
           <h1 className="App-title">Roster</h1>
         </header>
 
-
-       
-   
-
         <Grid container spacing={3}>
           <Grid item xs={4}>
               <AddItem Add_Todo_List={Add_Todo_List}/>
@@ -77,11 +64,11 @@ console.log(todo_list)
                   alltasks={todo_list} 
                   title={'To-do List'} 
                   Add_inprogress_list={Add_inprogress_list}
-                  Add_Complete_list ={Add_Complete_list}
+                  
               />            
           </Grid>
           <Grid item xs={4}>
-              <NewList alltasks={inprogress_list} title={'InProgress'} /> 
+              <NewList alltasks={inprogress_list} title={'InProgress'} Add_Complete_list ={Add_Complete_list} /> 
           </Grid>
           <Grid item xs={4}>
               <NewList alltasks={completed_list} title={'Completed'} /> 

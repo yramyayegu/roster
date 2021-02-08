@@ -2,14 +2,10 @@ import React from 'react'
 import Paper from '@material-ui/core/Paper';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
 import { makeStyles } from '@material-ui/core/styles';
-import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Button from '@material-ui/core/Button';
-import Container from '@material-ui/core/Container';
-
-
+//CSS
 const useStyles = makeStyles((theme) => ({
     root: {
       flexGrow: 1, 
@@ -20,22 +16,25 @@ const useStyles = makeStyles((theme) => ({
       color: theme.palette.text.secondary,
     },   
 }))
+//Component
 function NewList(props){
-  
+//Event handle function on click of every task
   const handlechange = (event) =>{
-   /* console.log(event.target.name)
-    console.log(event.target.value)
-    console.log(event.target.id)*/
-    
-
-
     if(event.target.name == 'To-do List'){ props.Add_inprogress_list(event.target.id,event.target.value) }
+    if(event.target.name == 'InProgress'){ 
+      props.Add_Complete_list(event.target.id,event.target.value)  
+    }
   }
 
     const classes = useStyles;
     return(
         <div>
-          <Paper className={classes.paper}>{props.title}</Paper>
+          <Paper className={classes.paper}>
+           
+            
+            {props.title}
+            
+            </Paper>
           <Paper className={classes.paper}>
             <List className={classes.root}>
             { props.alltasks.map(item => (
