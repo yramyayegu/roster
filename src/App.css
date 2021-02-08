@@ -111,9 +111,22 @@ body{
 }
 .App .MuiPaper-root form {
   
-  color: rgba(0, 0, 0,0.57) !important;
+  color: #00000096 !important;
 }
 .DayApp .MuiPaper-root form {
   
   color: rgba(0, 0, 0, 0.87) !important;
+}
+
+.MuiInput-underline::before {
+  border-bottom: 1px solid rgb(225, 225, 225) !important;
+  
+}
+.MuiInputLabel-animated {
+  color: #fff !important;
+  font-size: 1em !important;
+}
+.MuiInputBase-input {
+ 
+  color: #fff !important;
 }

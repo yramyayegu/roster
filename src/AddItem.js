@@ -1,9 +1,11 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles,ThemeProvider } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import EditIcon from '@material-ui/icons/Edit';
 import Modal from '@material-ui/core/Modal';
 import './App.css'
+import TextField from '@material-ui/core/TextField';
+
 //Css
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -31,8 +33,10 @@ function AddItem(props)
     // Collecting Form  Data
     const handleSubmit = (event) =>  {
         const New_task = event.target.task.value;
+        if(New_task){
         props.Add_Todo_List(New_task)
         event.target.task.value =''
+        }
         event.preventDefault();
         return false;
     }
@@ -86,7 +90,18 @@ return(
             <div>
                 <form onSubmit={handleSubmit.bind()}> 
                   <p>
-                    <textarea name='task' ></textarea>
+
+                  <ThemeProvider>
+        <TextField
+          className={classes.margin}
+          label="ThemeProvider"
+          id="mui-theme-provider-standard-input"
+          name='task'
+        />
+
+</ThemeProvider>
+
+                    
                   </p>
                     <input type="submit"  value="Submit" />
                 </form>
