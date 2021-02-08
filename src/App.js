@@ -5,6 +5,9 @@ import NewList from './NewList';
 import AddItem from './AddItem';
 import './App.css';
 import {Remove_task} from './utility';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
 //CSS
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -49,12 +52,42 @@ const [completed_list,setcompleted_list] = useState([]);
     }])
     Remove_task(id,inprogress_list)
   }
+  const[App , setApp] = useState('DayApp')
+  const [state, setState] = React.useState({
+    checkedB: false,
+  });
+
+  const handleChange = (event) => {
+    setState({ ...state, [event.target.name]: event.target.checked });
+    
+    if(!state.checkedB){
+
+      document.getElementById("root").className='NightApp'
+     document.getElementById("App").className=''
+    
+    }
+    else{
+      document.getElementById("root").className='DayApp'      
+    }
+  };
+
   const classes = useStyles();
       return (
 
-        <div className="App">
+        <div id='App' className="App">
         <header className="App-header">
           <h1 className="App-title">Roster</h1>
+          <FormControlLabel
+        control={
+          <Switch
+            checked={state.checkedB}
+            onChange={handleChange}
+            name="checkedB"
+            color="primary"
+          />
+        }
+        label={(state.checkedB) ? 'Night Mode' : 'Day Mode' }
+      />
         </header>
 
         <Grid container spacing={3}>

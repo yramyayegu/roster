@@ -20,8 +20,8 @@ const useStyles = makeStyles((theme) => ({
 function NewList(props){
 //Event handle function on click of every task
   const handlechange = (event) =>{
-    if(event.target.name == 'To-do List'){ props.Add_inprogress_list(event.target.id,event.target.value) }
-    if(event.target.name == 'InProgress'){ 
+    if(event.target.name === 'To-do List'){ props.Add_inprogress_list(event.target.id,event.target.value) }
+    if(event.target.name === 'InProgress'){ 
       props.Add_Complete_list(event.target.id,event.target.value)  
     }
   }
