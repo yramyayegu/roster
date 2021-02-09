@@ -5,6 +5,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import Modal from '@material-ui/core/Modal';
 import './App.css'
 import TextField from '@material-ui/core/TextField';
+import { Button } from 'react-bootstrap';
 
 //Css
 const useStyles = makeStyles((theme) => ({
@@ -20,16 +21,16 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor:'#fff',
       width: '50%',
       marginLeft: '25%',
-      marginTop: '15%',
-      
+      marginTop: '15%', 
     }
-
-    
   }));
 
 function AddItem(props)
 {
     const classes = useStyles();
+    const [open, setOpen] = React.useState(false);
+    const [title, setTitle] = React.useState('Make Your List');
+
     // Collecting Form  Data
     const handleSubmit = (event) =>  {
         const New_task = event.target.task.value;
@@ -40,75 +41,57 @@ function AddItem(props)
         event.preventDefault();
         return false;
     }
-
-    
-    const [open, setOpen] = React.useState(false);
-    const [title, setTitle] = React.useState('Make Your List');
-
+    // Open Model
     const handleOpen = () => {
       setOpen(true);
     };
-
+    // Close Model
     const handleClose = () => {
       setOpen(false);
     };
+
     const GetName = (event) =>{
-     
       setTitle(event.target.value);
     }
- 
+    // Model body to change name
     const body = (
       <div className={classes.paper}>
         <div className={classes.box}>
         <input name='todotitle' onChange={GetName.bind()} />
-        <p></p>
-        <p>
-        <button onClick={handleClose} >Submit</button>
-        </p>
+          <br /><br />
+          <button onClick={handleClose} >Submit</button>
         </div>
       </div>
     );
    
 return(
-    <div>
+      <div>
         <Paper className={classes.paper}>
           {title}
-        <EditIcon  onClick={handleOpen}/>
-          
-
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
-      >
-        {body}
-      </Modal>
+          <EditIcon  onClick={handleOpen}/>
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="simple-modal-title"
+            aria-describedby="simple-modal-description">{body}</Modal>
 
         </Paper>
         <Paper className={classes.paper}>
-            <div>
-                <form onSubmit={handleSubmit.bind()}> 
-                  <p>
-
-                  <ThemeProvider>
-        <TextField
-          className={classes.margin}
-          label="ThemeProvider"
-          id="mui-theme-provider-standard-input"
-          name='task'
-        />
-
-</ThemeProvider>
-
-                    
-                  </p>
-                    <input type="submit"  value="Submit" />
-                </form>
-            </div>  
+          <div>
+            <form onSubmit={handleSubmit.bind()}> 
+              <p>
+              <ThemeProvider>
+              <TextField
+                className={classes.margin}
+                label="ThemeProvider"
+                id="mui-theme-provider-standard-input"
+                name='task'/>
+              </ThemeProvider>
+              </p>
+              <Button type="submit"> Add</Button>
+            </form>
+          </div>  
         </Paper>
-    </div>
-)
-}
-
+      </div>
+)}
 export default AddItem;

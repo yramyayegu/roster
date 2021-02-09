@@ -16,8 +16,9 @@ const useStyles = makeStyles((theme) => ({
       color: theme.palette.text.secondary,
     },   
 }))
-//Component
+
 function NewList(props){
+  const classes = useStyles;
 //Event handle function on click of every task
   const handlechange = (event) =>{
     if(event.target.name === 'To-do List'){ props.Add_inprogress_list(event.target.id,event.target.value) }
@@ -25,33 +26,21 @@ function NewList(props){
       props.Add_Complete_list(event.target.id,event.target.value)  
     }
   }
-
-    const classes = useStyles;
-    return(
-        <div>
-          <Paper className={classes.paper}>
-           
-            
-            {props.title}
-            
-            </Paper>
-          <Paper className={classes.paper}>
-            <List className={classes.root}>
-            { props.alltasks.map(item => (
-              <ListItem>
-                  <FormControlLabel control={<Button name={props.title} value={item.value} id={item.id} /> } 
-                  
-                   key={item.id} 
-                   label={item.value} 
-                   onClick={handlechange}
-                  />
-              </ListItem>
-            ))}
-              
-            </List>
-          </Paper>
-      </div>
-    )
-}
-
+return(
+    <div>
+      <Paper className={classes.paper}>{props.title}</Paper>
+      <Paper className={classes.paper}>
+        <List className={classes.root}>
+        { props.alltasks.map(item => (
+          <ListItem>
+            <FormControlLabel control={<Button name={props.title} value={item.value} id={item.id} /> }               
+              key={item.id} 
+              label={item.value} 
+              onClick={handlechange} />
+          </ListItem>
+        ))}
+        </List>
+      </Paper>
+  </div>
+)}
 export default NewList;
